@@ -141,7 +141,7 @@ kakaopay.fail-url=http://localhost:3000/payment/fail
 
 ### Swagger 문서
 
-애플리케이션이 실행된 후 `http://localhost:8080/swagger-ui.html`에서 API 문서를 확인할 수 있습니다.
+애플리케이션이 실행된 후 `http://localhost:8080/swagger-ui.html`에서 [API 문서](https://github.com/kyudori/kyudori-Spring-ShoppingMall/blob/main/Swagger%20UI.pdf)를 확인할 수 있습니다.
 
 ## 보안
 
