@@ -7,32 +7,32 @@
 
 ## 목차
 
-- [주요 기능]
-- [아키텍처]
-- [사용된 기술 스택]
-- [설치 및 실행]
-- [환경 설정]
-- [API 엔드포인트]
-- [보안]
-- [결제 통합]
-- [파일 저장]
-- [Docker와 Docker Compose 설정]
-- [개발 환경]
+- 주요 기능
+- 아키텍처
+- 사용된 기술 스택
+- 설치 및 실행
+- 환경 설정
+- API 엔드포인트
+- 보안
+- 결제 통합
+- 파일 저장
+- Docker와 Docker Compose 설정
+- 개발 환경
 
 ## 주요 기능
 
-- 사용자 관리: 사용자 등록, 로그인, 비밀번호 재설정, 이메일 인증.
-- 제품 관리: 제품의 CRUD(생성, 조회, 업데이트, 삭제) 기능.
-- 장바구니 관리: 사용자가 장바구니에 제품을 추가, 수정, 삭제할 수 있음.
+- 사용자 관리: 회원 가입, 로그인, 아이디 찾기, 비밀번호 재설정, 이메일 인증.
+- 제품 관리: 제품 CRUD(생성, 조회, 업데이트, 삭제) 기능.
+- 장바구니 관리: 사용자가 장바구니에 제품을 추가, 수정, 삭제 기능.
 - 주문 처리: 사용자 주문 생성 및 상태 업데이트 기능.
 - 결제 처리: KakaoPay를 이용한 결제 처리 기능.
-- 역할 기반 접근 제어: 사용자 및 관리자 역할에 따른 접근 제어.
+- 역할 기반 접근 제어: 사용자(User) 및 관리자(Admin) 역할에 따른 접근 제어.
 - CORS 설정: 프론트엔드와의 통신을 위한 CORS 설정.
-- JWT 기반 인증: 무상태 인증 방식으로 JWT 사용.
+- JWT 인증: 인증 방식으로 JWT 사용.
 
 ## 아키텍처
 
-이 프로젝트는 Spring Boot의 전형적인 아키텍처를 따르며, 각 계층은 다음과 같은 역할을 합니다:
+Spring Boot의 전형적인 아키텍처를 따르며, 각 계층은 다음과 같은 역할을 합니다:
 
 - **Controller Layer**: HTTP 요청 및 응답을 처리합니다.
 - **Service Layer**: 비즈니스 로직을 처리합니다.
@@ -42,11 +42,11 @@
 
 - **Spring Boot**: 백엔드 프레임워크.
 - **Spring Security**: 애플리케이션 보안을 담당.
-- **JWT**: 무상태 인증을 위한 JSON Web Token.
+- **JWT**: 인증을 위한 JSON Web Token.
 - **Spring Data JPA**: 데이터베이스 상호작용.
-- **MySQL**: 주요 데이터베이스.
+- **MySQL**: 데이터베이스.
 - **Swagger/OpenAPI**: API 문서화.
-- **KakaoPay API**: 결제 처리 통합.
+- **KakaoPay API**: 결제 시스템.
 - **Gradle**: 프로젝트 빌드 및 의존성 관리.
 - **Docker & Docker Compose**: 컨테이너화 및 환경 설정 관리.
 
@@ -101,13 +101,13 @@ kakaopay.fail-url=http://localhost:3000/payment/fail
 
 ### CORS 설정
 
-애플리케이션은 기본적으로 `http://localhost:3000`에서 오는 CORS 요청을 허용합니다. 이 설정은 `SecurityConfig`와 `WebConfig` 클래스에서 수정할 수 있습니다.
+애플리케이션은 기본적으로 `http://localhost:3000`에서 오는 CORS 요청을 허용합니다. 설정은 `SecurityConfig`와 `WebConfig` 클래스에서 수정할 수 있습니다.
 
 ## API 엔드포인트
 
 ### 사용자 관리
 
-- **사용자 등록:** `POST /api/users/register`
+- **회원가입입:** `POST /api/users/register`
 - **로그인:** `POST /api/users/login`
 - **이메일 인증:** `GET /api/users/verify-email`
 - **아이디 찾기:** `GET /api/users/find-id`
@@ -148,19 +148,19 @@ kakaopay.fail-url=http://localhost:3000/payment/fail
 
 ## 보안
 
-- **비밀번호 암호화:** BCrypt를 사용하여 비밀번호를 안전하게 저장합니다.
-- **JWT 인증:** JSON Web Tokens(JWT)를 사용하여 무상태 인증을 구현합니다.
-- **역할 기반 접근 제어:** 사용자 및 관리자 역할에 따른 접근 제어가 구현되어 있습니다.
-- **CORS 설정:** 특정 오리진에서만 API에 접근할 수 있도록 설정되어 있습니다.
+- **비밀번호 암호화:** BCrypt를 사용하여 비밀번호를 안전하게 저장.
+- **JWT 인증:** JSON Web Tokens(JWT)를 사용하여 인증 구현.
+- **역할 기반 접근 제어:** 사용자 및 관리자 역할에 따른 접근 제어가 구현.
+- **CORS 설정:** 특정 오리진에서만 API에 접근할 수 있도록 설정.
 
 ## 결제 통합
 
-애플리케이션은 KakaoPay와 통합되어 결제 처리를 지원합니다. 결제 흐름은 다음과 같습니다:
+애플리케이션은 KakaoPay를 기반으로 결제를 지원합니다. 결제 흐름은 다음과 같습니다:
 
 1. **결제 준비:** `POST /api/payment/kakao/ready`
-   - KakaoPay로 결제 세션을 준비합니다.
+   - KakaoPay로 결제 세션을 준비.
 2. **결제 승인:** `GET /api/payment/kakao/approve`
-   - 사용자가 결제를 승인한 후 결제 프로세스를 완료합니다.
+   - 사용자가 결제를 승인한 후 결제 프로세스를 완료.
 
 ## 파일 저장
 
@@ -168,7 +168,7 @@ kakaopay.fail-url=http://localhost:3000/payment/fail
 
 ## 도커와 Docker Compose 설정
 
-이 프로젝트는 Docker를 이용해 쉽게 배포할 수 있습니다. Docker를 이용해 MySQL 데이터베이스와 백엔드 애플리케이션, 프론트엔드 애플리케이션을 컨테이너로 구성할 수 있습니다.
+이 프로젝트는 Docker를 이용해 쉽게 배포할 수 있습니다. Docker를 이용해 MySQL 데이터베이스와 백엔드 애플리케이션, 프론트엔드 애플리케이션 각각을 총 3개의 컨테이너로 구성할 수 있습니다.
 
 ### Dockerfile
 
@@ -241,8 +241,6 @@ networks:
   shoppingmall-network:
     driver: bridge
 ```
-
-이 설정을 사용하여 MySQL 데이터베이스, 백엔드, 프론트엔드 애플리케이션을 각각의 Docker 컨테이너로 구성할 수 있습니다.
 
 ## 개발 환경
 
