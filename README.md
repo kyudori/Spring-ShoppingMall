@@ -63,8 +63,12 @@ cd Spring-ShoppingMall
 
 ### 데이터베이스 설정
 
-- MySQL을 설치하고, 프로젝트용 데이터베이스를 생성하세요.
+- MySQL을 설치하고, 프로젝트용 데이터베이스 shopping_mall를 생성하세요.
 - `application.properties` 파일에서 데이터베이스 설정을 업데이트하세요.
+
+### 데이터베이스
+![Untitled](https://github.com/user-attachments/assets/69794482-7cdd-4daa-bafd-c57448b00eac)
+
 
 ### 의존성 설치
 
